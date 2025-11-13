@@ -33,7 +33,6 @@ open Intruder → Positions. Click Clear § to remove auto positions.
 highlight only the password value and click Add § (so only password is a payload). Don’t include surrounding form names or other params.
 
 attack type: Sniper for single position brute-force. If you want to brute-force username+password combos use Cluster Bomb with two positions.
-  - ![Screenshot 2025-11-02 222944](https://github.com/user-attachments/assets/05262b49-2787-42f7-93b3-1e41cdbe4b2d)
   - youll see in burpsuite that the login was captured. if you click on it, youll see your username and password.
     ![Screenshot 2025-11-02 223132](https://github.com/user-attachments/assets/9bc8beec-a402-4a4b-9610-b646f9fe734d)
   -now were going to click it and forwad it to intruder. Once inside intruder, highlight your password that'll be between $ signs.
