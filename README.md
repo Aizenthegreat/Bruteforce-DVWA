@@ -47,7 +47,7 @@ attack type: Sniper for single position brute-force. If you want to brute-force 
   - This will tell Burpsuite to flag this reponse if given
     
 
-6. start the attack safely
+4. start the attack safely
 
 turn Proxy → Intercept off so automated requests aren’t held.
 
@@ -55,7 +55,7 @@ in Intruder click Start attack. Watch results. Community edition is single-threa
 
 monitor for: responses that do not contain the grep failure string, responses with different Response length, or responses with redirect codes (3xx). Those are candidate successes.
 
-7. inspect candidate results & verify
+5. inspect candidate results & verify
 
 click a promising result → view full request/response. Confirm the request body shows the username and the candidate password. 
 
