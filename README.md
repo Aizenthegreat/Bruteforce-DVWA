@@ -35,7 +35,9 @@ highlight only the password value and click Add § (so only password is a payloa
 attack type: Sniper for single position brute-force. If you want to brute-force username+password combos use Cluster Bomb with two positions.
   - youll see in burpsuite that the login was captured. if you click on it, youll see your username and password.
     ![Screenshot 2025-11-02 223132](https://github.com/user-attachments/assets/9bc8beec-a402-4a4b-9610-b646f9fe734d)
+    
   -now were going to click it and forwad it to intruder. Once inside intruder, highlight your password that'll be between $ signs.
+  
  ![Screenshot 2025-11-02 223404](https://github.com/user-attachments/assets/03b3085c-78fc-4ec0-a96c-80fe966df97f)
 - now create another tab and create a file with random passwords. preferably ones that are very common. we'll head to payload config in truder and upload that file.
 - ![Screenshot 2025-11-02 224053](https://github.com/user-attachments/assets/e46edb5b-8e7b-4cb0-b038-d737bfe94f9e)
