@@ -44,7 +44,9 @@ attack type: Sniper for single position brute-force. If you want to brute-force 
 - Almost done!, lets go into the code of the webpage where we tried to loginto with our fake credentials. scroll down and find the error message we would get if we were to put in the wrong credentials. copy it and paste it into "Grep - Match"
 ![Screenshot 2025-11-02 224508](https://github.com/user-attachments/assets/91d9f54d-7f0b-441b-9b86-983e8d68b40c)
 ![Screenshot 2025-11-02 224701](https://github.com/user-attachments/assets/7e2709e7-29e7-4709-8345-2db35b8d295b)
+
   - This will tell Burpsuite to flag this reponse if given
+    
 4.prepare payloads (wordlist)
 
 create/load a password list. For quick lab testing you can make a short file (one password per line). For realistic tests use curated lists (e.g., rockyou.txt subsets). Save as passwords.txt.
@@ -54,7 +56,7 @@ Intruder → Payloads: choose Payload type → File or Simple list, then Load yo
 
 burpsuite used every password within our file, and if you havent noticed there one input that is missing a username 1. that is our password. and when you click on it, you can see the full request. the username and password 
 - now lets head back to DVWA and plugin that passowrd.
-  ![Screenshot 2025-11-02 225051](https://github.com/user-attachments/assets/94ae8f82-79a3-47b2-88fb-c8b0241b954b)
+  
 
 5. onfigure detection (grep / success indicators)
 
@@ -79,6 +81,8 @@ monitor for: responses that do not contain the grep failure string, responses wi
 click a promising result → view full request/response. Confirm the request body shows the username and the candidate password. Inspect the response HTML for success indicators (e.g., welcome text, logout link, redirected URL).
 
 copy the discovered credentials and test them on DVWA’s login page.
+
+![Screenshot 2025-11-02 225051](https://github.com/user-attachments/assets/94ae8f82-79a3-47b2-88fb-c8b0241b954b)
 
   Bingo!!!
  
