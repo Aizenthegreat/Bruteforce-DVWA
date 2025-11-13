@@ -39,7 +39,7 @@ attack type: Sniper for single position brute-force. If you want to brute-force 
   -now were going to click it and forwad it to intruder. Once inside intruder, highlight your password that'll be between $ signs.
   
  ![Screenshot 2025-11-02 223404](https://github.com/user-attachments/assets/03b3085c-78fc-4ec0-a96c-80fe966df97f)
-- now create another tab and create a file with random passwords. preferably ones that are very common. we'll head to payload config in truder and upload that file.
+- now create another tab and create a file with random passwords. preferably ones that are very common. we'll head to payload config in intruder and upload that file.
 - ![Screenshot 2025-11-02 224053](https://github.com/user-attachments/assets/e46edb5b-8e7b-4cb0-b038-d737bfe94f9e)
 - Almost done!, lets go into the code of the webpage where we tried to loginto with our fake credentials. scroll down and find the error message we would get if we were to put in the wrong credentials. copy it and paste it into "Grep - Match"
 ![Screenshot 2025-11-02 224508](https://github.com/user-attachments/assets/91d9f54d-7f0b-441b-9b86-983e8d68b40c)
