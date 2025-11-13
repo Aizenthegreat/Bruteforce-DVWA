@@ -2,7 +2,7 @@
 brute force walkthrough using burpsuite
 
 In this demonstartaion as per the title. I will demonstrate a brute force login using DVWA using only burpsuit. 
-Withou further ado, lets get started.
+Without further ado, lets get started.
 
 1. Start your VMs (recommended two: attacker + target).
 
