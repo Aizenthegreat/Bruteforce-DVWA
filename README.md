@@ -57,7 +57,10 @@ monitor for: responses that do not contain the grep failure string, responses wi
 
 7. inspect candidate results & verify
 
-click a promising result → view full request/response. Confirm the request body shows the username and the candidate password. Inspect the response HTML for success indicators (e.g., welcome text, logout link, redirected URL).
+click a promising result → view full request/response. Confirm the request body shows the username and the candidate password. 
+
+![Screenshot 2025-11-02 224943](https://github.com/user-attachments/assets/950414c5-02cb-465a-bf39-f62927005bb3)
+
 
 copy the discovered credentials and test them on DVWA’s login page.
 
