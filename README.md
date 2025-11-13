@@ -4,18 +4,33 @@ brute force walkthrough using burpsuite
 In this demonstartaion as per the title. I will demonstrate a brute force login using DVWA using only burpsuit. 
 Withou further ado, lets get started.
 
-1. start up your VMs(recomended to use two). remote into one through cmd and use the other one will be the envirnment that we will use for the attack.
-   - start up docker and dvwa 
+1. Start your VMs (recommended two: attacker + target).
+
+Start Docker and DVWA on the target VM.
+
+Example: DVWA available at http://<VM_IP>:8080.
    - ![Screenshot 2025-11-02 220538](https://github.com/user-attachments/assets/81d646b7-374f-4f98-a736-e3e6b7efdbd8)
      
-2. now in the VM that you will be conducting the attack on, head to the left side bar and fire up burpsuite. 
-- head to proxy, turn on intercept and open browser
+2. configure Burp & browser proxy
+
+in Burp → Proxy → Options: confirm a listener (e.g., 127.0.0.1:8080).
+
+configure your browser to use that proxy (or use Burp’s embedded browser).
+
+go to Proxy → Intercept and turn Intercept on (we will capture one request).
   ![Screenshot 2025-11-02 220748](https://github.com/user-attachments/assets/9bc47094-d72b-4277-a5aa-1e2d9d9e77e9)
-- once your in the browser, head to DVWA and login (remember its, http://VM_IP that dvwa is initialized in:8080)
-- once your logged in you can see burpsuite capture traffic from your login. itll look something liek this.
+browse to DVWA and log in (any creds) to capture the POST request. Burp will show the login request with username and password fields.
 - ![Screenshot 2025-11-02 220953](https://github.com/user-attachments/assets/f57f8160-4edf-4082-b9d2-82ede3a22ff7)
 
-  3. once your logged into DVWA, click on brute force and youll see a login prompt. try logging in with random credentials.
+  3. send request to Intruder & select position(s)
+
+right-click the captured login request → Send to Intruder.
+
+open Intruder → Positions. Click Clear § to remove auto positions.
+
+highlight only the password value and click Add § (so only password is a payload). Don’t include surrounding form names or other params.
+
+attack type: Sniper for single position brute-force. If you want to brute-force username+password combos use Cluster Bomb with two positions.
   - ![Screenshot 2025-11-02 222944](https://github.com/user-attachments/assets/05262b49-2787-42f7-93b3-1e41cdbe4b2d)
   - youll see in burpsuite that the login was captured. if you click on it, youll see your username and password.
     ![Screenshot 2025-11-02 223132](https://github.com/user-attachments/assets/9bc8beec-a402-4a4b-9610-b646f9fe734d)
@@ -27,15 +42,43 @@ Withou further ado, lets get started.
 ![Screenshot 2025-11-02 224508](https://github.com/user-attachments/assets/91d9f54d-7f0b-441b-9b86-983e8d68b40c)
 ![Screenshot 2025-11-02 224701](https://github.com/user-attachments/assets/7e2709e7-29e7-4709-8345-2db35b8d295b)
   - This will tell Burpsuite to flag this reponse if given
-4. Now were ready to run our configurations. go ahead and press "start attack". Let it run and you should see something like this after it is done.
+4.prepare payloads (wordlist)
+
+create/load a password list. For quick lab testing you can make a short file (one password per line). For realistic tests use curated lists (e.g., rockyou.txt subsets). Save as passwords.txt.
+
+Intruder → Payloads: choose Payload type → File or Simple list, then Load your file.
 ![Screenshot 2025-11-02 224943](https://github.com/user-attachments/assets/3d9d2fea-c14a-4498-83ad-b0dc95ede161)
 
 burpsuite used every password within our file, and if you havent noticed there one input that is missing a username 1. that is our password. and when you click on it, you can see the full request. the username and password 
 - now lets head back to DVWA and plugin that passowrd.
   ![Screenshot 2025-11-02 225051](https://github.com/user-attachments/assets/94ae8f82-79a3-47b2-88fb-c8b0241b954b)
 
-  Bingo!!!
+5. onfigure detection (grep / success indicators)
 
+run one known-fail login and view the response body or page HTML. Copy the exact failure message (example: Invalid username or password).
+
+Intruder → Options → Grep - Match: paste the exact failure string. Burp will mark results containing that string as failures.
+
+Also add alternative indicators: look for redirects (HTTP 302), presence/absence of “login” text, or changes in Response length. Use multiple grep entries if needed.
+
+Why: successful login usually does not contain the failure string; it often returns a different page or redirect. Grep lets you filter quickly.
+
+6. start the attack safely
+
+turn Proxy → Intercept off so automated requests aren’t held.
+
+in Intruder click Start attack. Watch results. Community edition is single-threaded and slow; be patient or use smaller lists.
+
+monitor for: responses that do not contain the grep failure string, responses with different Response length, or responses with redirect codes (3xx). Those are candidate successes.
+
+7. inspect candidate results & verify
+
+click a promising result → view full request/response. Confirm the request body shows the username and the candidate password. Inspect the response HTML for success indicators (e.g., welcome text, logout link, redirected URL).
+
+copy the discovered credentials and test them on DVWA’s login page.
+
+  Bingo!!!
+ 
 
 
 
