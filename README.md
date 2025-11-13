@@ -19,10 +19,12 @@ configure your browser to use that proxy (or use Burp’s embedded browser).
 
 go to Proxy → Intercept and turn Intercept on (we will capture one request).
   ![Screenshot 2025-11-02 220748](https://github.com/user-attachments/assets/9bc47094-d72b-4277-a5aa-1e2d9d9e77e9)
+  
 browse to DVWA and log in (any creds) to capture the POST request. Burp will show the login request with username and password fields.
+
 - ![Screenshot 2025-11-02 220953](https://github.com/user-attachments/assets/f57f8160-4edf-4082-b9d2-82ede3a22ff7)
 
-  3. send request to Intruder & select position(s)
+3. send request to Intruder & select position(s)
 
 right-click the captured login request → Send to Intruder.
 
