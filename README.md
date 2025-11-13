@@ -47,26 +47,6 @@ attack type: Sniper for single position brute-force. If you want to brute-force 
 
   - This will tell Burpsuite to flag this reponse if given
     
-4.prepare payloads (wordlist)
-
-create/load a password list. For quick lab testing you can make a short file (one password per line). For realistic tests use curated lists (e.g., rockyou.txt subsets). Save as passwords.txt.
-
-Intruder → Payloads: choose Payload type → File or Simple list, then Load your file.
-![Screenshot 2025-11-02 224943](https://github.com/user-attachments/assets/3d9d2fea-c14a-4498-83ad-b0dc95ede161)
-
-burpsuite used every password within our file, and if you havent noticed there one input that is missing a username 1. that is our password. and when you click on it, you can see the full request. the username and password 
-- now lets head back to DVWA and plugin that passowrd.
-  
-
-5. onfigure detection (grep / success indicators)
-
-run one known-fail login and view the response body or page HTML. Copy the exact failure message (example: Invalid username or password).
-
-Intruder → Options → Grep - Match: paste the exact failure string. Burp will mark results containing that string as failures.
-
-Also add alternative indicators: look for redirects (HTTP 302), presence/absence of “login” text, or changes in Response length. Use multiple grep entries if needed.
-
-Why: successful login usually does not contain the failure string; it often returns a different page or redirect. Grep lets you filter quickly.
 
 6. start the attack safely
 
